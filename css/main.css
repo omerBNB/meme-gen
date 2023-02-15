@@ -8,3 +8,6 @@
 @import 'components/imgs.css';
 @import 'components/canvas.css';
 @import 'components/logo.css';
+@import 'components/searchbar.css';
+/* media queries */
+@import 'mq/mobile.css'

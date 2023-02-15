@@ -1,7 +1,7 @@
 
 .main-layout{
     display: grid;
-    grid-template-columns: 50px repeat(3, 1fr) 50px;
+    grid-template-columns: 100px repeat(3, 1fr) 100px;
 }
 
 .flex{

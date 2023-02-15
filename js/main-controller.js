@@ -54,6 +54,10 @@ function onDecreaseFont() {
 }
 
 function onAddLine() {
+  if(gMeme.lines.length >= 3){
+    return
+  }
+  console.log('example')
   addLine();
   currLineId++;
   if (currLineId > gMeme.lines.length - 1) {

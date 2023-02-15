@@ -1,0 +1,93 @@
+
+
+@media (max-width: 720px){
+    .main-layout{
+        display: grid;
+        grid-template-columns: 20px repeat(3, 1fr) 20px;
+    }
+    .main-header {
+        height: 40px;
+        background-color: #5c5c5c;
+        /* box-shadow: #1e1e1e; */
+      }
+      .logo {
+        margin-inline-start: 12.5%;
+      }
+      .logo{
+        font-size: 1.1428rem;
+        color: #adadad;
+    }
+    .clean-list{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 0.7428rem ;
+        margin-inline-end: 80px;
+    }
+      li {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        margin-inline-start: 6%;
+        padding: 15px 15px;
+        /* border: 1px solid #a09e9e; */
+      }
+      
+    li:hover {
+        color: var(--clrgrn);
+        box-shadow: inset 0 -4px 0 #b8d4b0;
+        cursor: pointer;
+      }
+      .editor{
+        grid-area: 4/2/5/5;
+        justify-items: center;
+        display: none;
+        gap: 20px;
+        grid-template-columns: repeat(1,1fr);
+        padding: 10px;
+        border-radius: 15px;
+        background-color: #ecb846;
+    }
+      .options-container{
+        grid-area: 2/1/4/1;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(7,1fr);
+        justify-items: center;
+        background-color: #fff;
+        border-radius: 15px;
+    }
+    
+    .user-inputs{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        align-items: center;
+        justify-items: center;
+        margin-inline-start: 5%;
+    }
+    
+    .text-edit-container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        align-items: center;
+        justify-items: center;
+    }
+    
+    .text-edit-container > button{
+        width: 100%;
+        padding: 5px;
+    }
+    
+    .temp{
+        justify-self: left;
+        height: 30px;
+        margin-inline-start: 5%;
+    }
+    .inputs{
+        grid-area: 3/1/5/3 ;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: repeat(2,1fr
+        );
+    }
+}
