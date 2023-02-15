@@ -2,7 +2,36 @@
     grid-column: 2/4;
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(8,1fr);
+    grid-template-rows: repeat(7,1fr);
+    justify-items: center;
+    background-color: #fff;
+    border-radius: 15px;
 }
 
+.user-inputs{
+    display: grid;
+    grid-template-columns: repeat(2,1fr
+    );
+    align-items: center;
+    justify-items: center;
+    margin-inline-start: 5%;
+}
 
+.text-edit-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr
+    );
+    align-items: center;
+    justify-items: center;
+}
+
+.text-edit-container > button{
+    width: 100%;
+    padding: 5px;
+}
+
+.temp{
+    justify-self: left;
+    height: 30px;
+    margin-inline-start: 5%;
+}

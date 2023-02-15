@@ -47,14 +47,16 @@
             ></canvas>
           </div>
           <section class="options-container">
-          <div>
+          <div class="user-inputs">
             <input type="text" id="txt-input" onchange="onSetLineTxt(this.value)" value="">
             <input type="color" value="" onchange="onSetTxtColor(this.value)">
           </div>
-          <button onclick="onAddLine()">Add Line</button>
-          <button onclick="onIncreaseFont()">Increae txt Size</button>
-          <button onclick="onDecreaseFont()">Decrease txt Size</button>
-          <button id="focusButton" onclick="onSwichLine()">⬇️⬆️</button>
+          <div class="text-edit-container">
+            <button onclick="onAddLine()">➕ Line</button>
+            <button onclick="onIncreaseFont()">⬆️ Txt Size</button>
+            <button onclick="onDecreaseFont()">⬇️ Txt Size</button>
+          </div>
+          <button class="temp" id="focusButton" onclick="onSwichLine()">⬇️⬆️</button>
           <div class="inputs">
             <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
         

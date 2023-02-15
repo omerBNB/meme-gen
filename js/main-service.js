@@ -30,7 +30,7 @@ var gMeme = {
   selectedLineIdx: 0,
   lines: [
     {
-      txt: "I sometimes eat Falafel",
+      txt: "Text Here",
       size: 20,
       align: "center",
       color: "red",
@@ -84,6 +84,15 @@ function drawText(text,size,align,color, x, y) {
   gCtx.closePath()
 }
 
+
+function drawRect(x, y) {
+  gCtx.strokeStyle = 'white'
+  gCtx.strokeRect(x, y, 300, 60)
+  
+  gCtx.fillStyle = 'rgba(255,255,255,0.3)'
+  gCtx.fillRect(x, y, 300, 60)
+}
+
 function SetTxtColor(clr) {
   gMeme.lines[currLineId].color = clr
 }
@@ -111,4 +120,8 @@ function addLine(){
     y:prevLine.y + 150,
   }
   gMeme.lines.push(newLine)
+}
+
+function getCurrLine(lineid){
+ return gMeme.lines[lineid]
 }

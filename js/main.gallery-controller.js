@@ -15,6 +15,7 @@ function onImgSelect(currImg){
     const selectedImg = setImg(id)
     onEditMeme()
     renderMeme(selectedImg)
+    drawRect(100, 75);
 }
 
 
