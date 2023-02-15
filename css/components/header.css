@@ -1,0 +1,24 @@
+.main-header {
+    height: 140px;
+    background-color: #5c5c5c;
+    /* box-shadow: #1e1e1e; */
+  }
+  
+  .logo {
+    margin-inline-start: 16.5%;
+  }
+  
+  li {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin-inline-start: 5%;
+    padding: 60px 30px;
+    /* border: 1px solid #a09e9e; */
+  }
+  
+li:hover {
+    color: var(--clrgrn);
+    box-shadow: inset 0 -6px 0 #93a88d;
+    cursor: pointer;
+  }
+  

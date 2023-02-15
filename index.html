@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css">
+    <title>My Meme Generator 3333</title>
+  </head>
+
+  <body onload="onInit()" class="main-layout">
+    <header class="main-header flex">
+      <div class="logo">Meme</div>
+      <nav class="main-nav">
+        <ul class="main-menu flex clean-list li">
+          <li onclick="onBackHome()">Gallery</li>
+          <li>Memes</li>
+          <li>About</li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="search-bar" class="search-bar">
+      <input
+        data-trans="search-fliter"
+        type="search"
+        id="query"
+        name="q"
+        placeholder="Search..."
+        value=""
+      />
+      <button data-trans="search-button" onclick="onSetSearchBy()">
+        Search
+      </button>
+    </div>
+    <section class="gallery">
+      <!-- <img id="1" src="imgs/1.jpg"> -->
+    </section>
+
+    <section class="editor">
+        <div class="canvas-container">
+            <canvas
+              width="500"
+              height="500"
+              style="outline: 1px solid green"
+              id="my-canvas"
+            ></canvas>
+          </div>
+          <section class="options-container">
+          <div>
+            <input type="text" id="txt-input" onchange="onSetLineTxt(this.value)" value="">
+            <input type="color" value="" onchange="onSetTxtColor(this.value)">
+          </div>
+          <button onclick="onAddLine()">Add Line</button>
+          <button onclick="onIncreaseFont()">Increae txt Size</button>
+          <button onclick="onDecreaseFont()">Decrease txt Size</button>
+          <button id="focusButton" onclick="onSwichLine()">⬇️⬆️</button>
+          <div class="inputs">
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+        
+            <button class="btn" onclick="onUploadImg()">
+              Upload Image from Canvas
+            </button>
+        
+            <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+          </div>
+        </section>
+    </section>
+    <script src="js/utils.js"></script>
+    <script src="js/main.gallery-controller.js"></script>
+    <script src="js/main-controller.js"></script>
+    <script src="js/main-service.js"></script>
+  </body>
+</html>
