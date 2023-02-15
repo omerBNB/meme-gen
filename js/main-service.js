@@ -3,8 +3,10 @@
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 };
 var gElCanvas;
 var gCurrImgId;
-var currLineId = 0
+var currLineId = 0;
 var gCtx;
+const STORAGE_KEY = 'memes'
+var gSavedMemes
 var gImgs = [
   { id: 1, url: "imgs/1.jpg", keywords: ["funny", "cat"] },
   { id: 2, url: "imgs/2.jpg", keywords: ["funny", "cat"] },
@@ -34,11 +36,37 @@ var gMeme = {
       size: 20,
       align: "center",
       color: "red",
-      x:250,
-      y:100,
+      x: 250,
+      y: 100,
     },
-
   ],
+  randLines: [
+    {
+      txt: makeLorem(5),
+      size: getRandomIntInclusive(20, 24),
+      align: "center",
+      color: getRandomColor(),
+      x: 250,
+      y: 100,
+    },
+    {
+      txt: makeLorem(5),
+      size: getRandomIntInclusive(20, 24),
+      align: "center",
+      color: getRandomColor(),
+      x: 250,
+      y: 250,
+    },
+    {
+      txt: makeLorem(5),
+      size: getRandomIntInclusive(20, 24),
+      align: "center",
+      color: getRandomColor(),
+      x: 250,
+      y: 400,
+    },
+  ],
+  isRnd: false,
 };
 
 function getImages() {
@@ -67,11 +95,11 @@ function setImg(id) {
   return currImg;
 }
 
-function drawText(text,size,align,color, x, y) {
-  gCtx.beginPath()
-  let imgClr = color
-  let txtSize = size
-  let textASlign = align
+function drawText(text, size, align, color, x, y) {
+  gCtx.beginPath();
+  let imgClr = color;
+  let txtSize = size;
+  let textASlign = align;
   gCtx.lineWidth = 2;
   gCtx.strokeStyle = `${imgClr}`;
   gCtx.fillStyle = "white";
@@ -81,47 +109,134 @@ function drawText(text,size,align,color, x, y) {
 
   gCtx.fillText(text, x, y); // Draws (fills) a given text at the given (x, y) position.
   gCtx.strokeText(text, x, y); // Draws (strokes) a given text at the given (x, y) position.
-  gCtx.closePath()
+  gCtx.closePath();
 }
 
-
 function drawRect(x, y) {
-  gCtx.strokeStyle = 'white'
-  gCtx.strokeRect(x, y, 300, 60)
-  
-  gCtx.fillStyle = 'rgba(255,255,255,0.3)'
-  gCtx.fillRect(x, y, 300, 60)
+  gCtx.strokeStyle = "white";
+  gCtx.strokeRect(x, y, 300, 50);
+
+  gCtx.fillStyle = "rgba(255,255,255,0.3)";
+  gCtx.fillRect(x, y, 300, 50);
 }
 
 function SetTxtColor(clr) {
-  gMeme.lines[currLineId].color = clr
+  gMeme.lines[currLineId].color = clr;
 }
 
 function setLineTxt(txt) {
-  gMeme.lines[currLineId].txt = txt;
-}
-
-function getCurrMemeTxtSize(){
-  return gMeme.lines[currLineId].size
-}
-
-function changeFontSize(txtSize){
-  gMeme.lines[currLineId].size = txtSize
-}
-
-function addLine(){
-  let prevLine = gMeme.lines[gMeme.lines.length-1]
-  let newLine = {
-    txt: "",
-    size: 20,
-    align: "center",
-    color: "red",
-    x:prevLine.x,
-    y:prevLine.y + 150,
+  if (!gMeme.isRnd) {
+    gMeme.lines[currLineId].txt = txt;
+  } else {
+    gMeme.randLines[currLineId].txt = txt;
   }
-  gMeme.lines.push(newLine)
 }
 
-function getCurrLine(lineid){
- return gMeme.lines[lineid]
+function getCurrMemeTxtSize() {
+  if (!gMeme.isRnd) {
+    return gMeme.lines[currLineId].size;
+  } else {
+    return gMeme.randLines[currLineId].size;
+  }
+}
+
+function changeFontSize(txtSize) {
+  if (!gMeme.isRnd) {
+    gMeme.lines[currLineId].size = txtSize;
+  } else gMeme.randLines[currLineId].size = txtSize;
+}
+
+function addLine() {
+  let prevLine = gMeme.lines[gMeme.lines.length - 1];
+  let newLine;
+  if (!prevLine) {
+    newLine = {
+      txt: "Text Here",
+      size: 20,
+      align: "center",
+      color: "red",
+      x: 250,
+      y: 100,
+    };
+  } else {
+    newLine = {
+      txt: "",
+      size: 20,
+      align: "center",
+      color: "red",
+      x: prevLine.x,
+      y: prevLine.y + 150,
+    };
+  }
+  gMeme.lines.push(newLine);
+  drawRect();
+}
+
+function getCurrLine(lineid) {
+  return gMeme.lines[lineid];
+}
+
+function getRandomImg() {
+  let img = gImgs[getRandomIntInclusive(0, gImgs.length - 1)];
+  return img;
+}
+
+function getRandomLine() {
+  let line =
+    gMeme.randLines[getRandomIntInclusive(0, gMeme.randLines.length - 1)];
+  let lines =
+    Math.random() > 0.5
+      ? line
+      : [
+          gMeme.randLines[getRandomIntInclusive(0, gMeme.randLines.length - 1)],
+          gMeme.randLines[getRandomIntInclusive(0, gMeme.randLines.length - 1)],
+        ];
+  if (lines.length) {
+    if (lines[0].y === lines[1].y) {
+      getRandomLine();
+    }
+  } else {
+    return lines;
+  }
+  return lines;
+}
+
+function clearRect() {
+  let line = gMeme.lines[currLineId];
+  gCtx.clearRect(line.x, line.y, 300, 50);
+}
+
+function isRndLines() {
+  gMeme.isRnd = true;
+}
+
+function isNotRndLines() {
+  gMeme.isRnd = false;
+}
+
+function eraseLine(lineId) {
+  gMeme.lines.splice(gMeme.lines[lineId], 1);
+}
+
+function increaseLineHeight(lineId) {
+  let line = getCurrLine(lineId);
+  line.y -= 5;
+}
+function lowerLineHeight(lineId) {
+  let line = getCurrLine(lineId);
+  line.y += 5;
+}
+
+function saveMeme(){
+  gSavedMemes ={
+    img: [],
+    lines: []
+  }
+  savedImg.img.push(setImg(gCurrImgId))
+  savedImg.lines.push(gMeme.lines) 
+  saveToStorage(STORAGE_KEY,gSavedMemes)
+}
+
+function getSavedMemes(){
+  return gSavedMemes = loadFromStorage('memes')
 }

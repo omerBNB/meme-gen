@@ -2,7 +2,7 @@
 
 
 function makeLorem(wordCount = 100) {
-    const words = ['The sky', 'above', 'the port', 'was', 'the color of television', 'tuned', 'to', 'a dead channel', '.', 'All', 'this happened', 'more or less', '.', 'I', 'had', 'the story', 'bit by bit', 'from various people', 'and', 'as generally', 'happens', 'in such cases', 'each time', 'it', 'was', 'a different story', '.', 'It', 'was', 'a pleasure', 'to', 'burn']
+    const words = ['The sky', 'above', 'the port', 'was', 'the color ', 'tuned', 'to', 'a channel', 'All', 'this happened', 'more or less', 'I', 'had', 'the story', 'bit by bit', 'from various people', 'and', 'as generally', 'happens', 'in such cases', 'each time', 'it', 'was', 'story', 'It', 'was', 'a pleasure', 'to', 'burn']
     var txt = ''
     while (wordCount > 0) {
         wordCount--
@@ -58,7 +58,14 @@ function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+}
 
+function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
+}
 function onUploadImg() {
     const imgDataUrl = gElCanvas.toDataURL('image/jpeg') // Gets the canvas content as an image format
 

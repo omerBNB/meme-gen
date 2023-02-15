@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css" />
     <title>My Meme Generator 4</title>
   </head>
 
   <body onload="onInit()" class="main-layout">
     <header class="main-header flex">
       <div class="logo">Meme</div>
+      <button onclick="onRenderRndImg()">I'M Flexible!</button>
       <nav class="main-nav">
         <ul class="main-menu flex clean-list li">
           <li onclick="onBackHome()">Gallery</li>
-          <li>Memes</li>
+          <li onclick="onGoToSavedMemes()">Memes</li>
           <li>About</li>
         </ul>
       </nav>
@@ -38,35 +39,60 @@
     </section>
 
     <section class="editor">
-        <div class="canvas-container">
-            <canvas
-              width="500"
-              height="500"
-              style="outline: 1px solid green"
-              id="my-canvas"
-            ></canvas>
-          </div>
-          <section class="options-container">
-          <div class="user-inputs">
-            <input type="text" id="txt-input" onchange="onSetLineTxt(this.value)" value="">
-            <input type="color" value="" onchange="onSetTxtColor(this.value)">
-          </div>
-          <div class="text-edit-container">
-            <button onclick="onAddLine()">➕ Line</button>
-            <button onclick="onIncreaseFont()">⬆️ Txt Size</button>
-            <button onclick="onDecreaseFont()">⬇️ Txt Size</button>
-          </div>
-          <button class="temp" id="focusButton" onclick="onSwichLine()">⬇️⬆️</button>
-          <div class="inputs">
-            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
-        
-            <button class="btn" onclick="onUploadImg()">
-              Upload Image from Canvas
-            </button>
-        
-            <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
-          </div>
-        </section>
+      <div class="canvas-container">
+        <canvas
+          width="500"
+          height="500"
+          style="outline: 1px solid green"
+          id="my-canvas"
+        ></canvas>
+      </div>
+      <section class="options-container">
+        <div class="user-inputs">
+          <input
+            type="text"
+            id="txt-input"
+            oninput="onSetLineTxt(this.value)"
+            value=""
+          />
+          <input type="color" value="" onchange="onSetTxtColor(this.value)" />
+        </div>
+        <div class="text-edit-container">
+          <button onclick="onAddLine()">➕ Line</button>
+          <button onclick="onIncreaseFont()">⬆️ Txt Size</button>
+          <button onclick="onDecreaseFont()">⬇️ Txt Size</button>
+        </div>
+        <button class="temp" id="focusButton" onclick="onSwichLine()">
+          ⬇️⬆️ Switch Lines
+        </button>
+        <button onclick="onEraseLine()">Erase Line</button>
+        <button onclick="onIncreaseLineHeight()">Increase Line Height</button>
+        <button onclick="onLowerLineHeight()">Lower Line Height</button>
+        <button onclick="onSaveMeme()">Save Meme</button>
+        <div class="inputs">
+          <input
+            type="file"
+            class="file-input btn"
+            name="image"
+            onchange="onImgInput(event)"
+          />
+
+          <button class="btn" onclick="onUploadImg()">
+            Upload Image from Canvas
+          </button>
+
+          <a
+            href="#"
+            class="btn"
+            onclick="downloadImg(this)"
+            download="my-img.jpg"
+            >Download as jpeg</a
+          >
+        </div>
+      </section>
+    </section>
+    <section class="saved-memes">
+
     </section>
     <script src="js/utils.js"></script>
     <script src="js/main.gallery-controller.js"></script>

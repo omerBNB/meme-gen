@@ -19,8 +19,11 @@ function renderMeme(img) {
 function onSetLineTxt(txt) {
   setLineTxt(txt);
   let currImg = setImg(gCurrImgId);
-  renderMeme(currImg);
-  document.getElementById(`txt-input`).value = "";
+  if(!gMeme.isRnd){
+    renderMeme(currImg);
+  } else {
+    onRndImgSelect(currImg)
+  }
 }
 
 function onSetTxtColor(selectedColor) {
@@ -54,17 +57,19 @@ function onDecreaseFont() {
 }
 
 function onAddLine() {
-  if(gMeme.lines.length >= 3){
-    return
+  if (gMeme.lines.length >= 3) {
+    return;
   }
-  console.log('example')
+  document.getElementById(`txt-input`).value = "";
   addLine();
   currLineId++;
   if (currLineId > gMeme.lines.length - 1) {
     currLineId = 0;
   }
-  let line = getCurrLine(currLineId)
-  drawRect(line.x - 150, line.y - 25)
+  let line = getCurrLine(currLineId);
+  let currImg = setImg(gCurrImgId)
+  renderMeme(currImg);
+  drawRect(line.x - 150, line.y - 25);
 }
 function onSwichLine() {
   currLineId++;
@@ -73,7 +78,7 @@ function onSwichLine() {
   }
   let currImg = setImg(gCurrImgId);
   renderMeme(currImg);
-  let line = getCurrLine(currLineId)
+  let line = getCurrLine(currLineId);
   drawRect(line.x - 150, line.y - 25);
 }
 
@@ -81,3 +86,22 @@ function downloadImg(elLink) {
   const imgContent = gElCanvas.toDataURL("image/jpeg");
   elLink.href = imgContent;
 }
+
+function onEraseLine(){
+  eraseLine(currLineId)
+  let currImg = setImg(gCurrImgId);
+  renderMeme(currImg);
+}
+
+
+function onIncreaseLineHeight(){
+  increaseLineHeight(currLineId)
+  let currImg = setImg(gCurrImgId);
+  renderMeme(currImg);
+}
+function onLowerLineHeight(){
+  lowerLineHeight(currLineId)
+  let currImg = setImg(gCurrImgId);
+  renderMeme(currImg);
+}
+
