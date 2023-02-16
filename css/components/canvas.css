@@ -22,7 +22,9 @@
     align-items: center;
     justify-items: center;
 }
-
+.text-edit-container > *{
+    width: 33%;
+}
 .text-edit-container > button{
     width: 100%;
     padding: 5px;

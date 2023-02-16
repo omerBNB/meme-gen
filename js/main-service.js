@@ -5,6 +5,7 @@ var gElCanvas;
 var gCurrImgId;
 var currLineId = 0;
 var gCtx;
+var gMemeIsInSaved = false
 const STORAGE_KEY = 'memes'
 var gSavedMemes
 var gImgs = [
@@ -228,20 +229,26 @@ function lowerLineHeight(lineId) {
 }
 
 function saveMeme(){
-  gSavedMemes = loadFromStorage('memes')
+  gSavedMemes = loadFromStorage(STORAGE_KEY)
   if(!gSavedMemes || !gSavedMemes.length){
     gSavedMemes = []
-    let meme ={
-      img: [],
-      lines: []
-    }
-    meme.img.push(setImg(gCurrImgId))
-    meme.lines.push(gMeme.lines)
-    gSavedMemes.push(meme)
   }
+  let img = gElCanvas.toDataURL()
+  let lines
+  if(gMeme.isRnd){
+     lines = gMeme.randLines
+  }else{
+     lines = gMeme.lines
+  }
+
+  let meme = {
+    img: img,
+    lines: lines
+  }
+  gSavedMemes.push(meme)
   saveToStorage(STORAGE_KEY,gSavedMemes)
 }
 
 function getSavedMemes(){
-  return gSavedMemes = loadFromStorage('memes')
+  return gSavedMemes = loadFromStorage(STORAGE_KEY)
 }

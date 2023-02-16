@@ -3,6 +3,7 @@
 function onInit() {
   gElCanvas = document.querySelector("#my-canvas");
   gCtx = gElCanvas.getContext("2d");
+  addEventListeners()
   renderGallery();
 }
 
@@ -105,3 +106,10 @@ function onLowerLineHeight(){
   renderMeme(currImg);
 }
 
+function addEventListeners(){
+  let upBtn = document.querySelector('.upBtn')
+  console.log('upBtn',upBtn)
+  upBtn.addEventListener('mousedown', onIncreaseLineHeight)
+  let downBtn = document.querySelector('.downBtn')
+  downBtn.addEventListener('mousedown', onLowerLineHeight)
+}

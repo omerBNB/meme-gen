@@ -9,9 +9,9 @@
   </head>
 
   <body onload="onInit()" class="main-layout">
-    <header class="main-header flex">
+    <header class="main-header flex nav">
       <div class="logo">Meme</div>
-      <button onclick="onRenderRndImg()">I'M Flexible!</button>
+      <button onclick="onRenderRndImg()" class="flex-btn">I'M Flexible!</button>
       <nav class="main-nav">
         <ul class="main-menu flex clean-list li">
           <li onclick="onBackHome()">Gallery</li>
@@ -66,8 +66,8 @@
           ⬇️⬆️ Switch Lines
         </button>
         <button onclick="onEraseLine()">Erase Line</button>
-        <button onclick="onIncreaseLineHeight()">Increase Line Height</button>
-        <button onclick="onLowerLineHeight()">Lower Line Height</button>
+        <button class="upBtn">Increase Line Height</button>
+        <button class="downBtn">Lower Line Height</button>
         <button onclick="onSaveMeme()">Save Meme</button>
         <div class="inputs">
           <input
@@ -91,9 +91,7 @@
         </div>
       </section>
     </section>
-    <section class="saved-memes">
-
-    </section>
+    <section class="saved-memes"></section>
     <script src="js/utils.js"></script>
     <script src="js/main.gallery-controller.js"></script>
     <script src="js/main-controller.js"></script>
