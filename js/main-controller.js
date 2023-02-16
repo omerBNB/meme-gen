@@ -4,7 +4,7 @@ function onInit() {
   gElCanvas = document.querySelector("#my-canvas");
   gCtx = gElCanvas.getContext("2d");
   addEventListeners()
-  addEventsToCanvas()
+  addMouseListeners()
   renderGallery();
 }
 
@@ -115,70 +115,3 @@ function addEventListeners(){
   downBtn.addEventListener('mousedown', onLowerLineHeight)
 }
 
-
-
-
-
-
-function handleMouseDown(e){
-  e.preventDefault();
-  startX=parseInt(e.clientX-offsetX);
-  startY=parseInt(e.clientY-offsetY);
-  // Put your mousedown stuff here
-  for(var i=0;i<texts.length;i++){
-      if(textHittest(startX,startY,i)){
-          selectedText=i;
-      }
-  }
-}
-
-// test if x,y is inside the bounding box of texts[textIndex]
-function textHittest(x,y,textIndex){
-    var text=texts[textIndex];
-    return(x>=text.x && 
-        x<=text.x+text.width &&
-        y>=text.y-text.height && 
-        y<=text.y);
-}
-// In mousemove
-
-// Change the selected text's x,y by the distance the mouse has been dragged:
-
-//     handle mousemove events
-//     calc how far the mouse has been dragged since
-//     the last mousemove event and move the selected text
-//     by that distance
-
-    function handleMouseMove(e){
-      if(selectedText<0){return;}
-      e.preventDefault();
-      mouseX=parseInt(e.clientX-offsetX);
-      mouseY=parseInt(e.clientY-offsetY);
-
-//  Put your mousemove stuff here
-      var dx=mouseX-startX;
-      var dy=mouseY-startY;
-      startX=mouseX;
-      startY=mouseY;
-
-      var text=texts[selectedText];
-      text.x+=dx;
-      text.y+=dy;
-      draw();
-    }
-// In mouseup
-
-// The drag is over:
-
-// done dragging
-function handleMouseUp(e){
-  e.preventDefault();
-  selectedText=-1;
-}
-
-function addEventsToCanvas(){
-  document.getElementById("my-canvas").mousedown(function(e){handleMouseDown(e);});
-  document.getElementById("my-canvas").mousemove(function(e){handleMouseMove(e);});
-  document.getElementById("my-canvas").mouseup(function(e){handleMouseUp(e);});
-  document.getElementById("my-canvas").mouseout(function(e){handleMouseOut(e);});
-}

@@ -2,11 +2,14 @@
 
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 };
 var gElCanvas;
+const TOUCH_EVS = ["touchstart", "touchmove", "touchend"];
+let gLastPos = { x: null, y: null };
 let gCurrSavedImgId;
 var gCurrImgId;
 var currLineId = 0;
 var gCtx;
 var gMemeIsInSaved = false;
+var gIsDrag = false;
 const STORAGE_KEY = "memes";
 var gSavedMemes;
 var gImgs = [
@@ -84,7 +87,7 @@ function setImg(id) {
   if (gMemeIsInSaved) {
     let memeStorage = loadFromStorage(STORAGE_KEY);
     currImg = memeStorage.find((item) => {
-      return item.id === +gCurrSavedImgId
+      return item.id === +gCurrSavedImgId;
     });
   } else {
     currImg = gImgs.find((img) => {
@@ -258,4 +261,16 @@ function saveMeme() {
 
 function getSavedMemes() {
   return (gSavedMemes = loadFromStorage(STORAGE_KEY));
+}
+
+function moveLine(pos) {
+  let line = gMeme.lines.filter(line =>{
+    return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
+  })
+  if(!line.length){
+    return
+  }else{
+    line.x = pos.x
+    line.y = pos.y
+  }
 }
