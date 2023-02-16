@@ -8,29 +8,30 @@ let gCurrSavedImgId;
 var gCurrImgId;
 var currLineId = 0;
 var gCtx;
+var gFilteredImgs
 var gMemeIsInSaved = false;
 var gIsDrag = false;
 const STORAGE_KEY = "memes";
 var gSavedMemes;
 var gImgs = [
-  { id: 1, url: "imgs/1.jpg", keywords: ["funny", "cat"] },
-  { id: 2, url: "imgs/2.jpg", keywords: ["funny", "cat"] },
-  { id: 3, url: "imgs/3.jpg", keywords: ["funny", "cat"] },
-  { id: 4, url: "imgs/4.jpg", keywords: ["funny", "cat"] },
-  { id: 5, url: "imgs/5.jpg", keywords: ["funny", "cat"] },
-  { id: 6, url: "imgs/6.jpg", keywords: ["funny", "cat"] },
-  { id: 7, url: "imgs/7.jpg", keywords: ["funny", "cat"] },
-  { id: 8, url: "imgs/8.jpg", keywords: ["funny", "cat"] },
-  { id: 9, url: "imgs/9.jpg", keywords: ["funny", "cat"] },
-  { id: 10, url: "imgs/10.jpg", keywords: ["funny", "cat"] },
-  { id: 11, url: "imgs/11.jpg", keywords: ["funny", "cat"] },
-  { id: 12, url: "imgs/12.jpg", keywords: ["funny", "cat"] },
-  { id: 13, url: "imgs/13.jpg", keywords: ["funny", "cat"] },
-  { id: 14, url: "imgs/14.jpg", keywords: ["funny", "cat"] },
-  { id: 15, url: "imgs/15.jpg", keywords: ["funny", "cat"] },
-  { id: 16, url: "imgs/16.jpg", keywords: ["funny", "cat"] },
-  { id: 17, url: "imgs/17.jpg", keywords: ["funny", "cat"] },
-  { id: 18, url: "imgs/18.jpg", keywords: ["funny", "cat"] },
+  { id: 1, url: "imgs/1.jpg", keywords: ["funny", "president"] },
+  { id: 2, url: "imgs/2.jpg", keywords: ["dog", "cute"] },
+  { id: 3, url: "imgs/3.jpg", keywords: ["baby", "dog"] },
+  { id: 4, url: "imgs/4.jpg", keywords: ["cute", "cat"] },
+  { id: 5, url: "imgs/5.jpg", keywords: ["funny", "baby"] },
+  { id: 6, url: "imgs/6.jpg", keywords: ["funny", "idiotic"] },
+  { id: 7, url: "imgs/7.jpg", keywords: ["funny", "baby"] },
+  { id: 8, url: "imgs/8.jpg", keywords: ["funny", "idiotic"] },
+  { id: 9, url: "imgs/9.jpg", keywords: ["funny", "baby"] },
+  { id: 10, url: "imgs/10.jpg", keywords: ["funny", "president"] },
+  { id: 11, url: "imgs/11.jpg", keywords: ["funny", "idiotic"] },
+  { id: 12, url: "imgs/12.jpg", keywords: ["funny", "idiotic"] },
+  { id: 13, url: "imgs/13.jpg", keywords: ["funny", "idiotic"] },
+  { id: 14, url: "imgs/14.jpg", keywords: ["funny", "idiotic"] },
+  { id: 15, url: "imgs/15.jpg", keywords: ["funny", "idiotic"] },
+  { id: 16, url: "imgs/16.jpg", keywords: ["funny", "idiotic"] },
+  { id: 17, url: "imgs/17.jpg", keywords: ["funny", "president"] },
+  { id: 18, url: "imgs/18.jpg", keywords: ["funny", "idiotic"] },
 ];
 var gMeme = {
   selectedImgId: 1,
@@ -301,4 +302,12 @@ function resetLines(){
       y: 50,
     },
   ]
+}
+
+function FilterMemes(val){
+  let imgs = getImages()
+  gFilteredImgs = imgs.filter(img => {
+     return img.keywords.includes(val.toLowerCase())
+     })
+  return gFilteredImgs
 }

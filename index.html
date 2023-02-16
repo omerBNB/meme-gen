@@ -20,7 +20,7 @@
         </ul>
       </nav>
     </header>
-
+    
     <div id="search-bar" class="search-bar">
       <input
         data-trans="search-fliter"
@@ -33,6 +33,15 @@
       <button data-trans="search-button" onclick="onSetSearchBy()">
         Search
       </button>
+      <input list="browsers" name="browser" id="browser">
+    <datalist id="browsers">
+      <option value="Funny">
+      <option value="President">
+      <option value="Dog">
+      <option value="Cat">
+      <option value="Idiotic">
+    </datalist>
+    <input type="submit" onclick="onFilterByKeyword()">
     </div>
     <section class="gallery">
       <!-- <img id="1" src="imgs/1.jpg"> -->

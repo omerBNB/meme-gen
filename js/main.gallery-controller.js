@@ -1,7 +1,7 @@
 "use strict";
 
 function renderGallery() {
-  let imgs = getImages();
+  let imgs = (!gFilteredImgs || !gFilteredImgs.length)?  getImages() : gFilteredImgs
   let strHTMLS = imgs.map(
     (img) =>
       `<img class="canvas-imgs" id="${img.id}" src=${img.url} onclick="onImgSelect(this)">`
@@ -148,4 +148,10 @@ function addMouseListeners() {
   gElCanvas.addEventListener('mousedown', onDown)
   gElCanvas.addEventListener('mousemove', onMove)
   gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function onFilterByKeyword(){
+  let elOption = document.getElementById('browser').value
+  FilterMemes(elOption)
+  renderGallery()
 }

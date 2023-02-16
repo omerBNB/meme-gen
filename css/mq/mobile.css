@@ -63,6 +63,13 @@
     grid-template-columns: repeat(4, 1fr);
     margin-bottom: 50px;
   }
+  .saved-memes{
+    grid-area: 3/1/4/5;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 50px;
+  }
   .editor {
     grid-area: 4/1/5/5;
     justify-items: center;
@@ -216,7 +223,13 @@
     grid-template-columns: repeat(6, 1fr);
     margin-bottom: 50px;
   }
-  
+  .saved-memes{
+    grid-area: 3/2/4/5;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(6, 1fr);
+    margin-bottom: 50px;
+  }
   .editor {
     grid-area: 4/2/5/5;
     justify-items: center;
@@ -367,6 +380,13 @@
   }
 
   .main-layout .gallery {
+    grid-area: 3/2/4/6;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(8, 1fr);
+    margin-bottom: 50px;
+  }
+  .saved-memes{
     grid-area: 3/2/4/6;
     display: grid;
     gap: 10px;
