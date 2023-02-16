@@ -41,8 +41,8 @@ var gMeme = {
       size: 20,
       align: "center",
       color: "red",
-      x: 250,
-      y: 100,
+      x: 150,
+      y: 50,
     },
   ],
   randLines: [
@@ -51,6 +51,14 @@ var gMeme = {
       size: getRandomIntInclusive(20, 24),
       align: "center",
       color: getRandomColor(),
+      x: 150,
+      y: 50,
+    },
+    {
+      txt: makeLorem(5),
+      size: getRandomIntInclusive(20, 24),
+      align: "center",
+      color: getRandomColor(),
       x: 250,
       y: 100,
     },
@@ -60,15 +68,7 @@ var gMeme = {
       align: "center",
       color: getRandomColor(),
       x: 250,
-      y: 250,
-    },
-    {
-      txt: makeLorem(5),
-      size: getRandomIntInclusive(20, 24),
-      align: "center",
-      color: getRandomColor(),
-      x: 250,
-      y: 400,
+      y: 150,
     },
   ],
   isRnd: false,
@@ -110,16 +110,18 @@ function drawText(text, size, align, color, x, y) {
   gCtx.textBaseline = "middle";
 
   gCtx.fillText(text, x, y); // Draws (fills) a given text at the given (x, y) position.
+  console.log('x',x)
+  console.log('y',y)
   gCtx.strokeText(text, x, y); // Draws (strokes) a given text at the given (x, y) position.
   gCtx.closePath();
 }
 
 function drawRect(x, y) {
   gCtx.strokeStyle = "white";
-  gCtx.strokeRect(x, y, 300, 50);
+  gCtx.strokeRect(x, y, 200, 50);
 
   gCtx.fillStyle = "rgba(255,255,255,0.3)";
-  gCtx.fillRect(x, y, 300, 50);
+  gCtx.fillRect(x, y, 200, 50);
 }
 
 function SetTxtColor(clr) {
@@ -165,8 +167,8 @@ function addLine() {
       size: 20,
       align: "center",
       color: "red",
-      x: 250,
-      y: 100,
+      x: 150,
+      y: 50,
     };
   } else {
     newLine = {
@@ -175,7 +177,7 @@ function addLine() {
       align: "center",
       color: "red",
       x: prevLine.x,
-      y: prevLine.y + 150,
+      y: prevLine.y + 75,
     };
   }
   gMeme.lines.push(newLine);
@@ -276,7 +278,25 @@ function moveLine(pos) {
 function resizeCanvas() {
   const elContainer = document.querySelector('.canvas-container')
   // Note: changing the canvas dimension this way clears the canvas
-  gElCanvas.width = elContainer.offsetWidth
+  gElCanvas.width = elContainer.offsetWidth/2
+  console.log('gElCanvas.width',gElCanvas.width)
+  console.log('elContainer.offsetWidth',elContainer.offsetWidth)
   let currImg = setImg(gCurrImgId);
+  if(!currImg){
+    return
+  }
   renderMeme(currImg);
+}
+
+function resetLines(){
+  gMeme.lines = [
+    {
+      txt: "Text Here",
+      size: 20,
+      align: "center",
+      color: "red",
+      x: 150,
+      y: 50,
+    },
+  ]
 }

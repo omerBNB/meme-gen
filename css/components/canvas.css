@@ -2,14 +2,12 @@
     grid-column: 2/4;
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(7,1fr);
+    grid-template-rows: repeat(5,1fr);
     justify-items: center;
     background-color: #ffffff;
     border-radius: 15px;
 }
-.canvas-container{
-    width: 500px;
-}
+
 .user-inputs{
     display: grid;
     grid-template-columns: repeat(2,1fr);

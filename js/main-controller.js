@@ -71,7 +71,7 @@ function onAddLine() {
   let line = getCurrLine(currLineId);
   let currImg = setImg(gCurrImgId)
   renderMeme(currImg);
-  drawRect(line.x - 150, line.y - 25);
+  drawRect(line.x - 100, line.y - 25);
 }
 function onSwichLine() {
   currLineId++;
@@ -81,7 +81,8 @@ function onSwichLine() {
   let currImg = setImg(gCurrImgId);
   renderMeme(currImg);
   let line = getCurrLine(currLineId);
-  drawRect(line.x - 150, line.y - 25);
+  drawRect(line.x - 100, line.y - 25);
+  document.getElementById('txt-input').value = ''
 }
 
 function downloadImg(elLink) {

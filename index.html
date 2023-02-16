@@ -8,7 +8,7 @@
     <title>My Meme Generator 4</title>
   </head>
 
-  <body onload="onInit()" class="main-layout" onresize="resizeCanvas()">
+  <body onload="onInit()" class="main-layout" >
     <header class="main-header flex nav">
       <div class="logo">Meme</div>
       <button onclick="onRenderRndImg()" class="flex-btn">I'M Flexible!</button>
@@ -41,8 +41,8 @@
     <section class="editor">
       <div class="canvas-container" >
         <canvas
-          width="300px"
-          height="300px"
+          width="300"
+          height="300"
           style="outline: 1px solid green"
           id="my-canvas"
         ></canvas>

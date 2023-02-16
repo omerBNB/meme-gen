@@ -1,7 +1,9 @@
 @media (min-width: 320px) {
   .main-layout {
     display: grid;
-    grid-template-columns: 10px repeat(3, 1fr) 10px;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
   }
   .main-header {
     height: 40px;
@@ -54,14 +56,14 @@
     justify-content: space-evenly;
   }
   .main-layout .gallery {
-    grid-area: 3/2/4/5;
+    grid-area: 3/1/4/5;
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(4, 1fr);
     margin-bottom: 50px;
   }
   .editor {
-    grid-area: 4/2/5/5;
+    grid-area: 4/1/5/5;
     justify-items: center;
     display: none;
     gap: 20px;
@@ -74,7 +76,7 @@
     grid-area: 2/1/3/1;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: 60px 50px 70px 70px;
+    grid-template-rows: 30px 70px 50px 50px;
     justify-items: center;
     background-color: #3f67c3;
     
@@ -97,8 +99,6 @@
   }
 
   .text-edit-container >* {
-  height: 40px;
-  font-size: 0.44rem;
   backface-visibility: hidden;
   background-color: #e0817e;
   border-radius: 6px;
@@ -112,7 +112,7 @@
   height: 44px;
   outline: none;
   overflow: hidden;
-  padding: 0 25px;
+  padding: 0 10px;
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
@@ -145,7 +145,7 @@
   margin: 12px 0 0;
   outline: none;
   overflow: hidden;
-  padding: 0 25px;
+  padding: 0 15px;
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
@@ -215,6 +215,7 @@
     grid-template-columns: repeat(6, 1fr);
     margin-bottom: 50px;
   }
+  
   .editor {
     grid-area: 4/2/5/5;
     justify-items: center;
@@ -363,6 +364,7 @@
     box-shadow: inset 0 -4px 0 #b8d4b0;
     cursor: pointer;
   }
+
   .main-layout .gallery {
     grid-area: 3/2/4/6;
     display: grid;
@@ -371,14 +373,17 @@
     margin-bottom: 50px;
   }
   .editor {
-    grid-area: 4/2/5/6;
+    grid-area: 4/3/5/5;
     justify-items: center;
     display: none;
     gap: 5px;
     grid-template-columns: repeat(2,1fr);
     /* padding: 10px; */
     border-radius: 15px;
-    background-color: #ecb846;
+    /* background-color: #ecb846; */
+  }
+  .canvas-container >*{
+    grid-column: 1/2;
   }
   .options-container {
     grid-area: 1/2/2/2;

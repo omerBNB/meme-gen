@@ -15,7 +15,8 @@ function onImgSelect(currImg) {
   const selectedImg = setImg(id);
   onEditMeme();
   renderMeme(selectedImg);
-  drawRect(100, 75);
+  drawRect(50, 25);
+  document.getElementById('txt-input').value = ''
 }
 
 function onRndImgSelect(currImg) {
@@ -46,6 +47,7 @@ function onEditMeme() {
   document.querySelector(".gallery").style.display = "none";
   document.querySelector(".saved-memes").style.display = "none";
   gMemeIsInSaved = false
+  resetLines()
 }
 
 function onBackHome() {
