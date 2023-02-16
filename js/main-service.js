@@ -228,12 +228,17 @@ function lowerLineHeight(lineId) {
 }
 
 function saveMeme(){
-  gSavedMemes ={
-    img: [],
-    lines: []
+  gSavedMemes = loadFromStorage('memes')
+  if(!gSavedMemes || !gSavedMemes.length){
+    gSavedMemes = []
+    let meme ={
+      img: [],
+      lines: []
+    }
+    meme.img.push(setImg(gCurrImgId))
+    meme.lines.push(gMeme.lines)
+    gSavedMemes.push(meme)
   }
-  savedImg.img.push(setImg(gCurrImgId))
-  savedImg.lines.push(gMeme.lines) 
   saveToStorage(STORAGE_KEY,gSavedMemes)
 }
 
