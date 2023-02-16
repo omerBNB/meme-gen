@@ -154,4 +154,5 @@ function onFilterByKeyword(){
   let elOption = document.getElementById('browser').value
   FilterMemes(elOption)
   renderGallery()
+  document.getElementById('browser').value = ''
 }
