@@ -110,7 +110,6 @@ function onLowerLineHeight(){
 
 function addEventListeners(){
   let upBtn = document.querySelector('.upBtn')
-  console.log('upBtn',upBtn)
   upBtn.addEventListener('mousedown', onIncreaseLineHeight)
   let downBtn = document.querySelector('.downBtn')
   downBtn.addEventListener('mousedown', onLowerLineHeight)

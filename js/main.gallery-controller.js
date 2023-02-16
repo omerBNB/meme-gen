@@ -142,7 +142,6 @@ function getEvPos(ev) {
       y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
     }
   }
-  console.log('pos',pos)
   return pos
 }
 function addMouseListeners() {

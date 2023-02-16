@@ -267,7 +267,7 @@ function getSavedMemes() {
 
 function moveLine(pos) {
   let line = gMeme.lines.filter(line =>{
-    console.log('line',line)
+    // console.log('line',line)
     return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
   })
   console.log('line',line)
