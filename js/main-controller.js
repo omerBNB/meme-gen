@@ -9,12 +9,20 @@ function onInit() {
 }
 
 function renderMeme(img) {
-  let elImg = document.getElementById(`${img.id}`);
-  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
-  let memes = getMemes();
-  memes.lines.forEach((line) => {
-    drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
-  });
+  if(gMemeIsInSaved){
+    let memes = getSavedMemes()
+    memes.forEach((line) => {
+      console.log('line',line)
+      drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
+    })
+  }else{
+    let elImg = document.getElementById(`${img.id}`);
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
+    let memes = getMemes();
+    memes.lines.forEach((line) => {
+      drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
+    });
+  }
   gCurrImgId = img.id;
 }
 

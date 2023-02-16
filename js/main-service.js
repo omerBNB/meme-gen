@@ -111,8 +111,6 @@ function drawText(text, size, align, color, x, y) {
   gCtx.textBaseline = "middle";
 
   gCtx.fillText(text, x, y); // Draws (fills) a given text at the given (x, y) position.
-  console.log('x',x)
-  console.log('y',y)
   gCtx.strokeText(text, x, y); // Draws (strokes) a given text at the given (x, y) position.
   gCtx.closePath();
 }
@@ -135,9 +133,7 @@ function setLineTxt(txt) {
   } else {
     gMeme.randLines[currLineId].txt = txt;
   }
-  if (gMemeIsInSaved) {
-    let lines = loadFromStorage(STORAGE_KEY);
-  }
+  
 }
 
 function getCurrMemeTxtSize() {
@@ -268,16 +264,19 @@ function getSavedMemes() {
 
 function moveLine(pos) {
   let line
-  if(gMeme.isRnd){
-    line = gMeme.randLines.filter(line =>{
-      return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
+  if(gMemeIsInSaved){
+    let savedLines = getSavedMemes()
+    console.log('savedLines',savedLines)
+    line = savedLines[0].lines.filter(line =>{
+      return (pos.x >= line.x-100 && pos.x < line.x + 100 && pos.y >= line.y-25 && pos.y < line.y + 25)
     })
       line[0].x = pos.x
       line[0].y = pos.y
+      saveToStorage(STORAGE_KEY, gSavedMemes)
   }else{
     line = gMeme.lines.filter(line =>{
       // console.log('line',line)
-      return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
+      return (pos.x >= line.x-100 && pos.x < line.x + 100 && pos.y >= line.y-25 && pos.y < line.y + 25)
     })
       line[0].x = pos.x
       line[0].y = pos.y

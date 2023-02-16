@@ -80,6 +80,7 @@ function renderSavedMemes() {
 
   console.log("strHTMLS", strHTMLS);
   document.querySelector(".saved-memes").innerHTML = strHTMLS.join("");
+ 
 }
 
 function onEditSavedMeme(img){
@@ -113,16 +114,10 @@ function onMove(ev) {
 
   const pos = getEvPos(ev)
   let line = moveLine(pos)
-  console.log('line',line)
-  if(gMeme.isRnd){
-    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
-    let currImg = setImg(gCurrImgId)
-    onRndImgSelect(currImg)
-  }else{
     drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
     let currImg = setImg(gCurrImgId);
     renderMeme(currImg);
-  }
+  
 }
 
 function onUp() {
