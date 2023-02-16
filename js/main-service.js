@@ -267,10 +267,16 @@ function moveLine(pos) {
   let line = gMeme.lines.filter(line =>{
     return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
   })
-  if(!line.length){
-    return
-  }else{
     line.x = pos.x
     line.y = pos.y
-  }
+  
+  return line
+}
+
+function resizeCanvas() {
+  const elContainer = document.querySelector('.canvas-container')
+  // Note: changing the canvas dimension this way clears the canvas
+  gElCanvas.width = elContainer.offsetWidth
+  let currImg = setImg(gCurrImgId);
+  renderMeme(currImg);
 }

@@ -110,12 +110,10 @@ function onMove(ev) {
   if (size < 10) size = 10
 
   const pos = getEvPos(ev)
-  moveLine(pos)
+  let line = moveLine(pos)
+  drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
   let currImg = setImg(gCurrImgId);
-  renderMeme(currImg)
-  // Save the last pos , we remember where we`ve been and move accordingly
-  // gStartPos = pos
-  // console.log('pos',pos)
+  renderMeme(currImg);
 }
 
 function onUp() {
