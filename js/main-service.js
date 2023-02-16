@@ -48,7 +48,7 @@ var gMeme = {
   ],
   randLines: [
     {
-      txt: makeLorem(5),
+      txt: makeLorem(3),
       size: getRandomIntInclusive(20, 24),
       align: "center",
       color: getRandomColor(),
@@ -56,19 +56,19 @@ var gMeme = {
       y: 50,
     },
     {
-      txt: makeLorem(5),
+      txt: makeLorem(3),
       size: getRandomIntInclusive(20, 24),
       align: "center",
       color: getRandomColor(),
-      x: 250,
+      x: 150,
       y: 100,
     },
     {
-      txt: makeLorem(5),
+      txt: makeLorem(3),
       size: getRandomIntInclusive(20, 24),
       align: "center",
       color: getRandomColor(),
-      x: 250,
+      x: 150,
       y: 150,
     },
   ],
@@ -267,14 +267,21 @@ function getSavedMemes() {
 }
 
 function moveLine(pos) {
-  let line = gMeme.lines.filter(line =>{
-    // console.log('line',line)
-    return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
-  })
-  console.log('line',line)
-    line[0].x = pos.x
-    line[0].y = pos.y
-  
+  let line
+  if(gMeme.isRnd){
+    line = gMeme.randLines.filter(line =>{
+      return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
+    })
+      line[0].x = pos.x
+      line[0].y = pos.y
+  }else{
+    line = gMeme.lines.filter(line =>{
+      // console.log('line',line)
+      return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
+    })
+      line[0].x = pos.x
+      line[0].y = pos.y
+  }
   return line
 }
 

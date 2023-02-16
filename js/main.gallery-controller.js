@@ -24,11 +24,11 @@ function onRndImgSelect(currImg) {
   let lines = getRandomLine();
   let elImg = document.getElementById(`${currImg.id}`);
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
-  if (!lines.length) {
+  if (!gMeme.randLines) {
     drawText(lines.txt, lines.size, lines.align, lines.color, lines.x, lines.y);
     //   drawRect(100, lines.y-25);
   } else {
-    lines.forEach((line) => {
+    gMeme.randLines.forEach((line) => {
       drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
       // drawRect(100, line.y-25);
     });
@@ -113,10 +113,16 @@ function onMove(ev) {
 
   const pos = getEvPos(ev)
   let line = moveLine(pos)
-  drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
   console.log('line',line)
-  let currImg = setImg(gCurrImgId);
-  renderMeme(currImg);
+  if(gMeme.isRnd){
+    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
+    let currImg = setImg(gCurrImgId)
+    onRndImgSelect(currImg)
+  }else{
+    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
+    let currImg = setImg(gCurrImgId);
+    renderMeme(currImg);
+  }
 }
 
 function onUp() {
