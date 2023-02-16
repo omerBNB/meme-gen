@@ -41,8 +41,8 @@
     <section class="editor">
       <div class="canvas-container">
         <canvas
-          width="500"
-          height="500"
+          width="500px"
+          height="500px"
           style="outline: 1px solid green"
           id="my-canvas"
         ></canvas>
@@ -62,13 +62,15 @@
           <button onclick="onIncreaseFont()">⬆️ Txt Size</button>
           <button onclick="onDecreaseFont()">⬇️ Txt Size</button>
         </div>
-        <button class="temp" id="focusButton" onclick="onSwichLine()">
-          ⬇️⬆️ Switch Lines
-        </button>
-        <button onclick="onEraseLine()">Erase Line</button>
-        <button class="upBtn">Increase Line Height</button>
-        <button class="downBtn">Lower Line Height</button>
-        <button onclick="onSaveMeme()">Save Meme</button>
+        <div class="second-bottuns-container">
+          <button id="focusButton" onclick="onSwichLine()">
+            ⬇️⬆️ Switch Lines
+          </button>
+          <button onclick="onEraseLine()">Erase Line</button>
+          <button class="upBtn">⬆️ Line Height</button>
+          <button class="downBtn">⬇️ Line Height</button>
+          <button onclick="onSaveMeme()">Save Meme</button>
+        </div>
         <div class="inputs">
           <input
             type="file"

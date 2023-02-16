@@ -10,6 +10,7 @@ function renderGallery() {
 }
 
 function onImgSelect(currImg) {
+  currLineId = 0
   const id = +currImg.id;
   const selectedImg = setImg(id);
   onEditMeme();
@@ -73,8 +74,16 @@ function renderSavedMemes() {
     return;
   }
   let strHTMLS = memes.map((memeImg) => 
-  `<img src="${memeImg.img}" class="canvas-imgs">`);
+  `<img id="${memeImg.id}" src="${memeImg.img}" class="canvas-imgs" onclick="onEditSavedMeme(this)">`);
 
   console.log("strHTMLS", strHTMLS);
   document.querySelector(".saved-memes").innerHTML = strHTMLS.join("");
+}
+
+function onEditSavedMeme(img){
+  document.querySelector(".editor").style.display = "grid";
+  document.querySelector(".gallery").style.display = "none";
+  document.querySelector(".saved-memes").style.display = "none"
+  gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+  gCurrSavedImgId = img.id
 }

@@ -39,7 +39,7 @@
   grid-template-columns: repeat(3, 1fr);
   padding: 10px;
   border-radius: 15px;
-  background-color: #ecb846;
+  /* background-color: #ecb846; */
 }
 
 .saved-memes {
