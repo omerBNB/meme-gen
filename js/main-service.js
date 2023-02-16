@@ -267,10 +267,12 @@ function getSavedMemes() {
 
 function moveLine(pos) {
   let line = gMeme.lines.filter(line =>{
+    console.log('line',line)
     return (pos.x >= line.x-150 && pos.x < line.x + 150 && pos.y >= line.y-25 && pos.y < line.y + 25)
   })
-    line.x = pos.x
-    line.y = pos.y
+  console.log('line',line)
+    line[0].x = pos.x
+    line[0].y = pos.y
   
   return line
 }

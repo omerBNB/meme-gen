@@ -113,7 +113,8 @@ function onMove(ev) {
 
   const pos = getEvPos(ev)
   let line = moveLine(pos)
-  drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
+  drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
+  console.log('line',line)
   let currImg = setImg(gCurrImgId);
   renderMeme(currImg);
 }

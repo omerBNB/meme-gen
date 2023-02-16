@@ -1,7 +1,7 @@
 @media (min-width: 320px) {
   .main-layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     justify-content: center;
   }
@@ -48,6 +48,7 @@
     padding: 5px;
   }
   .search-bar {
+    grid-column: 2/4;
     display: flex;
     padding: 5px;
     background-color: #fff;
