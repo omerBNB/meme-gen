@@ -10,9 +10,10 @@ function onInit() {
 
 function renderMeme(img) {
   if(gMemeIsInSaved){
-    let memes = getSavedMemes()
-    memes.forEach((line) => {
-      console.log('line',line)
+    let meme = getCurrSavedImg()
+    let elImg = document.getElementById(`${meme.id}`);
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    meme.lines.forEach((line) => {
       drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
     })
   }else{
@@ -28,17 +29,13 @@ function renderMeme(img) {
 
 function onSetLineTxt(txt) {
   setLineTxt(txt);
-  let currImg = setImg(gCurrImgId);
-  if(!gMeme.isRnd){
-    renderMeme(currImg);
-  } else {
-    onRndImgSelect(currImg)
-  }
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
+  renderMeme(currImg);
 }
 
 function onSetTxtColor(selectedColor) {
   SetTxtColor(selectedColor);
-  let currImg = setImg(gCurrImgId);
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
 }
 
@@ -50,7 +47,7 @@ function onIncreaseFont() {
   txtSize += 4;
   console.log("txtSize", txtSize);
   changeFontSize(txtSize);
-  let currImg = setImg(gCurrImgId);
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
 }
 
@@ -62,31 +59,56 @@ function onDecreaseFont() {
   txtSize -= 4;
   console.log("txtSize", txtSize);
   changeFontSize(txtSize);
-  let currImg = setImg(gCurrImgId);
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
 }
 
 function onAddLine() {
-  if (gMeme.lines.length >= 3) {
-    return;
+  let determ = lineLengthDetermination()
+  if (!determ){
+    return
   }
   document.getElementById(`txt-input`).value = "";
   addLine();
   currLineId++;
-  if (currLineId > gMeme.lines.length - 1) {
-    currLineId = 0;
-  }
+  lineDetermination()
   let line = getCurrLine(currLineId);
-  let currImg = setImg(gCurrImgId)
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
   drawRect(line.x - 100, line.y - 25);
 }
-function onSwichLine() {
-  currLineId++;
-  if (currLineId > gMeme.lines.length - 1) {
+
+function lineLengthDetermination(){
+  if(gMemeIsInSaved){
+    let meme = getCurrSavedImg()
+    if (meme.lines.length >= 3) {
+      return false
+    } else{
+      return true
+    }
+}
+else if (gMeme.lines.length >= 3) {
+  return false;
+}else{
+  return true
+}
+}
+
+function lineDetermination(){
+  if(gMemeIsInSaved){
+    let meme = getCurrSavedImg()
+    if (currLineId > meme.lines.length - 1) {
+      currLineId = 0;
+    }
+  } else if (currLineId > gMeme.lines.length - 1) {
     currLineId = 0;
   }
-  let currImg = setImg(gCurrImgId);
+  }
+
+function onSwichLine() {
+  currLineId++;
+  lineDetermination()
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
   let line = getCurrLine(currLineId);
   drawRect(line.x - 100, line.y - 25);
@@ -100,19 +122,19 @@ function downloadImg(elLink) {
 
 function onEraseLine(){
   eraseLine(currLineId)
-  let currImg = setImg(gCurrImgId);
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
 }
 
 
 function onIncreaseLineHeight(){
   increaseLineHeight(currLineId)
-  let currImg = setImg(gCurrImgId);
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
 }
 function onLowerLineHeight(){
   lowerLineHeight(currLineId)
-  let currImg = setImg(gCurrImgId);
+  let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId);
   renderMeme(currImg);
 }
 

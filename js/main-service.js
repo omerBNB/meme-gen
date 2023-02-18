@@ -8,7 +8,7 @@ let gCurrSavedImgId;
 var gCurrImgId;
 var currLineId = 0;
 var gCtx;
-var gFilteredImgs
+var gFilteredImgs;
 var gMemeIsInSaved = false;
 var gIsDrag = false;
 const STORAGE_KEY = "memes";
@@ -46,32 +46,6 @@ var gMeme = {
       y: 50,
     },
   ],
-  randLines: [
-    {
-      txt: makeLorem(3),
-      size: getRandomIntInclusive(20, 24),
-      align: "center",
-      color: getRandomColor(),
-      x: 150,
-      y: 50,
-    },
-    {
-      txt: makeLorem(3),
-      size: getRandomIntInclusive(20, 24),
-      align: "center",
-      color: getRandomColor(),
-      x: 150,
-      y: 100,
-    },
-    {
-      txt: makeLorem(3),
-      size: getRandomIntInclusive(20, 24),
-      align: "center",
-      color: getRandomColor(),
-      x: 150,
-      y: 150,
-    },
-  ],
   isRnd: false,
 };
 
@@ -86,10 +60,8 @@ function getMemes() {
 function setImg(id) {
   let currImg;
   if (gMemeIsInSaved) {
-    let memeStorage = loadFromStorage(STORAGE_KEY);
-    currImg = memeStorage.find((item) => {
-      return item.id === +gCurrSavedImgId;
-    });
+    let meme = getCurrSavedImg();
+    currImg = meme.img;
   } else {
     currImg = gImgs.find((img) => {
       return img.id === id;
@@ -124,39 +96,70 @@ function drawRect(x, y) {
 }
 
 function SetTxtColor(clr) {
+  if (gMemeIsInSaved) {
+    let meme = getCurrSavedImg();
+    meme.lines[currLineId].color = clr;
+    let currImgId = gSavedMemes.findIndex((img) => {
+      return img.id === meme.id;
+    });
+    gSavedMemes.splice(currImgId, 1, meme);
+    saveToStorage(STORAGE_KEY, gSavedMemes);
+  }
   gMeme.lines[currLineId].color = clr;
 }
 
 function setLineTxt(txt) {
-  if (!gMeme.isRnd) {
-    gMeme.lines[currLineId].txt = txt;
-  } else {
-    gMeme.randLines[currLineId].txt = txt;
+  if (gMemeIsInSaved) {
+    let meme = getCurrSavedImg();
+    meme.lines[currLineId].txt = txt;
+    let currImgId = gSavedMemes.findIndex((img) => {
+      return img.id === meme.id;
+    });
+    gSavedMemes.splice(currImgId, 1, meme);
+    saveToStorage(STORAGE_KEY, gSavedMemes);
   }
-  
+  gMeme.lines[currLineId].txt = txt;
 }
 
 function getCurrMemeTxtSize() {
-  if (!gMeme.isRnd) {
-    return gMeme.lines[currLineId].size;
-  } else {
-    return gMeme.randLines[currLineId].size;
+  if (gMemeIsInSaved) {
+    let meme = getCurrSavedImg();
+    return meme.lines[gCurrSavedImgId].size;
   }
+  return gMeme.lines[currLineId].size;
 }
 
 function changeFontSize(txtSize) {
-  if (!gMeme.isRnd) {
-    gMeme.lines[currLineId].size = txtSize;
-  } else gMeme.randLines[currLineId].size = txtSize;
+  if (gMemeIsInSaved) {
+    let meme = getCurrSavedImg();
+    meme.lines[gCurrSavedImgId].size = txtSize;
+    let currImgId = gSavedMemes.findIndex((img) => {
+      return img.id === meme.id;
+    });
+    gSavedMemes.splice(currImgId, 1, meme);
+    saveToStorage(STORAGE_KEY, gSavedMemes);
+  }
+  gMeme.lines[currLineId].size = txtSize;
+}
+
+function getCurrSavedImg() {
+  let memes = loadFromStorage(STORAGE_KEY);
+  let meme = memes.find((img) => {
+    return img.id === gCurrSavedImgId;
+  });
+  console.log('meme',meme)
+  return meme;
 }
 
 function addLine() {
-  let prevLine;
-  if (gMeme.isRnd) {
-    prevLine = gMeme.lines[gMeme.randLines.length - 1];
-  } else {
-    prevLine = gMeme.lines[gMeme.lines.length - 1];
+  let meme;
+  if (gMemeIsInSaved) {
+    meme = getCurrSavedImg();
   }
+  let prevLine;
+  prevLine = gMemeIsInSaved
+    ? meme.lines[meme.lines.length - 1]
+    : gMeme.lines[gMeme.lines.length - 1];
   let newLine;
   if (!prevLine) {
     newLine = {
@@ -177,12 +180,24 @@ function addLine() {
       y: prevLine.y + 75,
     };
   }
+  if (gMemeIsInSaved) {
+    meme.lines.push(newLine);
+    let currImgId = gSavedMemes.findIndex((img) => {
+      return img.id === meme.id;
+    });
+    gSavedMemes.splice(currImgId, 1, meme);
+    saveToStorage(STORAGE_KEY, gSavedMemes);
+  }
   gMeme.lines.push(newLine);
   drawRect();
 }
 
 function getCurrLine(lineid) {
-  return gMeme.lines[lineid];
+  let meme;
+  if (gMemeIsInSaved) {
+    meme = getCurrSavedImg();
+  }
+  return gMemeIsInSaved ? meme.lines[lineid] : gMeme.lines[lineid];
 }
 
 function getRandomImg() {
@@ -191,23 +206,45 @@ function getRandomImg() {
 }
 
 function getRandomLine() {
-  let line =
-    gMeme.randLines[getRandomIntInclusive(0, gMeme.randLines.length - 1)];
+  gMeme.lines = [
+    {
+      txt: makeLorem(3),
+      size: getRandomIntInclusive(20, 24),
+      align: "center",
+      color: getRandomColor(),
+      x: 150,
+      y: 50,
+    },
+    {
+      txt: makeLorem(3),
+      size: getRandomIntInclusive(20, 24),
+      align: "center",
+      color: getRandomColor(),
+      x: 150,
+      y: 100,
+    },
+    {
+      txt: makeLorem(3),
+      size: getRandomIntInclusive(20, 24),
+      align: "center",
+      color: getRandomColor(),
+      x: 150,
+      y: 150,
+    },
+  ];
+  let line = gMeme.lines[getRandomIntInclusive(0, gMeme.lines.length - 1)];
   let lines =
     Math.random() > 0.5
       ? line
       : [
-          gMeme.randLines[getRandomIntInclusive(0, gMeme.randLines.length - 1)],
-          gMeme.randLines[getRandomIntInclusive(0, gMeme.randLines.length - 1)],
+          gMeme.lines[getRandomIntInclusive(0, gMeme.lines.length - 1)],
+          gMeme.lines[getRandomIntInclusive(0, gMeme.lines.length - 1)],
         ];
   if (lines.length) {
     if (lines[0].y === lines[1].y) {
       getRandomLine();
     }
-  } else {
-    return lines;
   }
-  return lines;
 }
 
 function clearRect() {
@@ -242,17 +279,11 @@ function saveMeme() {
     gSavedMemes = [];
   }
   let img = gElCanvas.toDataURL();
-  let lines;
-  if (gMeme.isRnd) {
-    lines = gMeme.randLines;
-  } else {
-    lines = gMeme.lines;
-  }
-
+  let lines = gMeme.lines;
   let meme = {
     img: img,
     lines: lines,
-    id: gCurrImgId,
+    id: makeId(),
   };
   gSavedMemes.push(meme);
   saveToStorage(STORAGE_KEY, gSavedMemes);
@@ -263,41 +294,55 @@ function getSavedMemes() {
 }
 
 function moveLine(pos) {
-  let line
-  if(gMemeIsInSaved){
-    let savedLines = getSavedMemes()
-    console.log('savedLines',savedLines)
-    line = savedLines[0].lines.filter(line =>{
-      return (pos.x >= line.x-100 && pos.x < line.x + 100 && pos.y >= line.y-25 && pos.y < line.y + 25)
+  let line;
+  if (gMemeIsInSaved) {
+    let meme = getCurrSavedImg();
+    console.log('meme',meme)
+    let test = meme.lines.filter((newline) => {
+      return (
+        pos.x >= newline.x - 100 &&
+        pos.x < newline.x + 100 &&
+        pos.y >= newline.y - 25 &&
+        pos.y < newline.y + 25
+      )
     })
-      line[0].x = pos.x
-      line[0].y = pos.y
-      saveToStorage(STORAGE_KEY, gSavedMemes)
-  }else{
-    line = gMeme.lines.filter(line =>{
-      // console.log('line',line)
-      return (pos.x >= line.x-100 && pos.x < line.x + 100 && pos.y >= line.y-25 && pos.y < line.y + 25)
-    })
-      line[0].x = pos.x
-      line[0].y = pos.y
+    test[0].x = pos.x;
+    test[0].y = pos.y;
+    let currImgId = gSavedMemes.findIndex((img) => {
+      return img.id === meme.id;
+    });
+    gSavedMemes.splice(currImgId, 1, meme);
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+    return test
+  } else {
+    line = gMeme.lines.filter((line) => {
+      return (
+        pos.x >= line.x - 100 &&
+        pos.x < line.x + 100 &&
+        pos.y >= line.y - 25 &&
+        pos.y < line.y + 25
+      )
+    });
+    line[0].x = pos.x;
+    line[0].y = pos.y;
   }
-  return line
+  return line;
 }
 
 function resizeCanvas() {
-  const elContainer = document.querySelector('.canvas-container')
+  const elContainer = document.querySelector(".canvas-container");
   // Note: changing the canvas dimension this way clears the canvas
-  gElCanvas.width = elContainer.offsetWidth/2
-  console.log('gElCanvas.width',gElCanvas.width)
-  console.log('elContainer.offsetWidth',elContainer.offsetWidth)
-  let currImg = setImg(gCurrImgId);
-  if(!currImg){
-    return
+  gElCanvas.width = elContainer.offsetWidth / 2;
+  console.log("gElCanvas.width", gElCanvas.width);
+  console.log("elContainer.offsetWidth", elContainer.offsetWidth);
+  let currImg = gMemeIsInSaved ? getCurrSavedImg() : setImg(gCurrImgId);
+  if (!currImg) {
+    return;
   }
   renderMeme(currImg);
 }
 
-function resetLines(){
+function resetLines() {
   gMeme.lines = [
     {
       txt: "Text Here",
@@ -307,13 +352,13 @@ function resetLines(){
       x: 150,
       y: 50,
     },
-  ]
+  ];
 }
 
-function FilterMemes(val){
-  let imgs = getImages()
-  gFilteredImgs = imgs.filter(img => {
-     return img.keywords.includes(val.toLowerCase())
-     })
-  return gFilteredImgs
+function FilterMemes(val) {
+  let imgs = getImages();
+  gFilteredImgs = imgs.filter((img) => {
+    return img.keywords.includes(val.toLowerCase());
+  });
+  return gFilteredImgs;
 }

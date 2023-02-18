@@ -11,7 +11,12 @@ function renderGallery() {
 
 function onImgSelect(currImg) {
   currLineId = 0
-  const id = +currImg.id;
+  let id
+  if(gMemeIsInSaved){
+    id = currImg.id
+  }else{
+    id = +currImg.id;
+  }
   const selectedImg = setImg(id);
   onEditMeme();
   renderMeme(selectedImg);
@@ -21,18 +26,13 @@ function onImgSelect(currImg) {
 
 function onRndImgSelect(currImg) {
   onEditMeme();
-  let lines = getRandomLine();
+  getRandomLine();
   let elImg = document.getElementById(`${currImg.id}`);
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
-  if (!gMeme.randLines) {
-    drawText(lines.txt, lines.size, lines.align, lines.color, lines.x, lines.y);
-    //   drawRect(100, lines.y-25);
-  } else {
-    gMeme.randLines.forEach((line) => {
+    gMeme.lines.forEach((line) => {
       drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
       // drawRect(100, line.y-25);
     });
-  }
   gCurrImgId = currImg.id;
 }
 
@@ -77,8 +77,6 @@ function renderSavedMemes() {
   }
   let strHTMLS = memes.map((memeImg) => 
   `<img id="${memeImg.id}" src="${memeImg.img}" class="canvas-imgs" onclick="onEditSavedMeme(this)">`);
-
-  console.log("strHTMLS", strHTMLS);
   document.querySelector(".saved-memes").innerHTML = strHTMLS.join("");
  
 }
@@ -92,10 +90,8 @@ function onEditSavedMeme(img){
 }
 
 function onDown(ev) {
-  console.log('Down')
   // Get the ev pos from mouse or touch
   const pos = getEvPos(ev)
-  // console.log('pos', pos)
   gIsDrag = true
   //Save the pos we start from
   // gStartPos = pos
@@ -104,8 +100,6 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-  // console.log('move')
-  // console.log('ev',ev)
   if (!gIsDrag) return
   const diff = Math.abs(ev.movementX) > Math.abs(ev.movementY) ? Math.abs(ev.movementX) : Math.abs(ev.movementY)
   let size = 10 * diff
@@ -114,14 +108,23 @@ function onMove(ev) {
 
   const pos = getEvPos(ev)
   let line = moveLine(pos)
+  console.log('line',line)
+  if(gMemeIsInSaved){
     drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
+    let meme = getCurrSavedImg();
+    let currImgId = gSavedMemes.findIndex((img) => {
+      return img.id === meme.id;
+    });
+    gSavedMemes.splice(currImgId, 1, meme);
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+  } else{
+    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
+  }
     let currImg = setImg(gCurrImgId);
     renderMeme(currImg);
-  
 }
 
 function onUp() {
-  console.log('Up')
   gIsDrag = false
   document.body.style.cursor = 'grab'
 }
