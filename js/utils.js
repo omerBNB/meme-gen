@@ -54,11 +54,6 @@ function loadImageFromInput(ev, onImageReady) {
     reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
 }
 
-function renderImg(img) {
-    // Draw the img on the canvas
-    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-}
-
 function saveToStorage(key, val) {
     localStorage.setItem(key, JSON.stringify(val))
 }

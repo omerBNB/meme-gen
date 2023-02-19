@@ -1,12 +1,13 @@
-"use strict";
+"use strict"
 
 function renderGallery() {
   let imgs = (!gFilteredImgs || !gFilteredImgs.length)?  getImages() : gFilteredImgs
   let strHTMLS = imgs.map(
     (img) =>
       `<img class="canvas-imgs" id="${img.id}" src=${img.url} onclick="onImgSelect(this)">`
-  );
-  document.querySelector(`.gallery`).innerHTML = strHTMLS.join("");
+  )
+  document.querySelector(`.gallery`).innerHTML = strHTMLS.join("")
+  console.log('strHTMLS',strHTMLS)
 }
 
 function onImgSelect(currImg) {
@@ -15,76 +16,78 @@ function onImgSelect(currImg) {
   if(gMemeIsInSaved){
     id = currImg.id
   }else{
-    id = +currImg.id;
+    id = +currImg.id
   }
-  const selectedImg = setImg(id);
-  onEditMeme();
-  renderMeme(selectedImg);
-  drawRect(50, 25);
+  const selectedImg = setImg(id)
+  onEditMeme()
+  resizeCanvas()
+  renderMeme(selectedImg)
+  drawRect(gElContainer.offsetWidth/2, 25)
   document.getElementById('txt-input').value = ''
 }
 
 function onRndImgSelect(currImg) {
-  onEditMeme();
-  getRandomLine();
-  let elImg = document.getElementById(`${currImg.id}`);
-  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
+  onEditMeme()
+  getRandomLine()
+  let elImg = document.getElementById(`${currImg.id}`)
+  gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
     gMeme.lines.forEach((line) => {
-      drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
-      // drawRect(100, line.y-25);
-    });
-  gCurrImgId = currImg.id;
+      drawText(line.txt, line.size, line.align, line.color, line.x, line.y)
+      // drawRect(100, line.y-25)
+    })
+  gCurrImgId = currImg.id
 }
 
 function onRenderRndImg() {
-  let img = getRandomImg();
-  onRndImgSelect(img);
-  isRndLines();
+  let img = getRandomImg()
+  onRndImgSelect(img)
+  isRndLines()
 }
 
 function onEditMeme() {
-  document.querySelector(".editor").style.display = "grid";
-  document.querySelector(".gallery").style.display = "none";
-  document.querySelector(".saved-memes").style.display = "none";
+  document.querySelector(".editor").style.display = "grid"
+  document.querySelector(".gallery").style.display = "none"
+  document.querySelector(".saved-memes").style.display = "none"
   gMemeIsInSaved = false
   resetLines()
 }
 
 function onBackHome() {
-  document.querySelector(".editor").style.display = "none";
-  document.querySelector(".gallery").style.display = "grid";
-  document.querySelector(".saved-memes").style.display = "none";
-  isNotRndLines();
+  document.querySelector(".editor").style.display = "none"
+  document.querySelector(".gallery").style.display = "grid"
+  document.querySelector(".saved-memes").style.display = "none"
+  isNotRndLines()
   gMemeIsInSaved = false
 }
 
 function onSaveMeme() {
-  saveMeme();
+  saveMeme()
 }
 
 function onGoToSavedMemes() {
-  document.querySelector(".editor").style.display = "none";
-  document.querySelector(".gallery").style.display = "none";
-  document.querySelector(".saved-memes").style.display = "grid";
-  renderSavedMemes();
+  document.querySelector(".editor").style.display = "none"
+  document.querySelector(".gallery").style.display = "none"
+  document.querySelector(".saved-memes").style.display = "grid"
+  renderSavedMemes()
   gMemeIsInSaved = true
 }
 
 function renderSavedMemes() {
-  let memes = getSavedMemes();
+  let memes = getSavedMemes()
+  console.log('memes',memes)
   if (!memes) {
-    return;
+    return
   }
   let strHTMLS = memes.map((memeImg) => 
-  `<img id="${memeImg.id}" src="${memeImg.img}" class="canvas-imgs" onclick="onEditSavedMeme(this)">`);
-  document.querySelector(".saved-memes").innerHTML = strHTMLS.join("");
- 
+  `<img id="${memeImg.id}" src="${memeImg.img}" class="canvas-imgs" onclick="onEditSavedMeme(this)">`)
+  document.querySelector(".saved-memes").innerHTML = strHTMLS.join("")
 }
 
 function onEditSavedMeme(img){
-  document.querySelector(".editor").style.display = "grid";
-  document.querySelector(".gallery").style.display = "none";
+  document.querySelector(".editor").style.display = "grid"
+  document.querySelector(".gallery").style.display = "none"
   document.querySelector(".saved-memes").style.display = "none"
+  console.log('img',img)
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
   gCurrImgId = img.id
 }
@@ -108,21 +111,20 @@ function onMove(ev) {
 
   const pos = getEvPos(ev)
   let line = moveLine(pos)
-  console.log('line',line)
   if(gMemeIsInSaved){
-    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
-    let meme = getCurrSavedImg();
+    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y)
+    let meme = getCurrSavedImg()
     let currImgId = gSavedMemes.findIndex((img) => {
-      return img.id === meme.id;
-    });
-    gSavedMemes.splice(currImgId, 1, meme);
+      return img.id === meme.id
+    })
+    gSavedMemes.splice(currImgId, 1, meme)
     saveToStorage(STORAGE_KEY, gSavedMemes)
   } else{
-    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
+    drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y)
   }
-    let currImg = setImg(gCurrImgId);
+    let currImg = setImg(gCurrImgId)
     console.log('currImg',currImg)
-    renderMeme(currImg);
+    renderMeme(currImg)
 }
 
 function onUp() {
