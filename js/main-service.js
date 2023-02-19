@@ -151,9 +151,7 @@ function changeFontSize(txtSize) {
 
 function getCurrSavedImg() {
   let memes = loadFromStorage(STORAGE_KEY)
-  console.log('memes',memes)
   let meme = memes.filter((img) => {
-    console.log('img',img)
     return img.id === +gCurrImgId
   })
   return meme
@@ -328,10 +326,8 @@ function moveLine(pos) {
       lines: meme[0].lines,
       id: +meme[0].id,
     }
-    console.log('splitedMeme',splitedMeme)
     gSavedMemes.splice(currImgId, 1, splitedMeme)
     saveToStorage(STORAGE_KEY, gSavedMemes)
-    console.log("gSavedMemes", gSavedMemes)
     return line
   } else {
     line = gMeme.lines.filter((line) => {
@@ -357,7 +353,6 @@ function resizeCanvas() {
   if (!currImg) {
     return
   }
-  console.log("currImg", currImg)
   renderMeme(currImg)
 }
 
@@ -385,7 +380,6 @@ function FilterMemes(val) {
 
 function renderImg(img) {
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-  console.log('img',img.src)
   let newImg = {
     id: gImgs[gImgs.length-1].id+1, url: img.src, keywords: ["MyImgs"]
   }

@@ -7,7 +7,6 @@ function renderGallery() {
       `<img class="canvas-imgs" id="${img.id}" src=${img.url} onclick="onImgSelect(this)">`
   )
   document.querySelector(`.gallery`).innerHTML = strHTMLS.join("")
-  console.log('strHTMLS',strHTMLS)
 }
 
 function onImgSelect(currImg) {
@@ -77,7 +76,6 @@ function onGoToSavedMemes() {
 
 function renderSavedMemes() {
   let memes = getSavedMemes()
-  console.log('memes',memes)
   if (!memes) {
     return
   }
@@ -91,7 +89,6 @@ function onEditSavedMeme(img){
   document.querySelector(".gallery").style.display = "none"
   document.querySelector(".saved-memes").style.display = "none"
   document.querySelector(".search-bar").style.display = "none"
-  console.log('img',img)
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
   gCurrImgId = img.id
   resizeCanvas()
@@ -128,7 +125,6 @@ function onMove(ev) {
     drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y)
   }
     let currImg = setImg(gCurrImgId)
-    console.log('currImg',currImg)
     renderMeme(currImg)
 }
 
