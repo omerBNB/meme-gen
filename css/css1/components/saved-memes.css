@@ -1,14 +1,8 @@
-.gallery{
-    display: grid;
+.saved-memes{
+    display: none;
     justify-items: center;
     background-color: #383b42;
     grid-template-columns: repeat(4,1fr);
     padding: 1.5vw;
     gap: 20px ;
-}
-
-.canvas-imgs{
-    width: 100%;
-    border-radius: 10px;
-    cursor: pointer;
 }

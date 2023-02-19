@@ -1,0 +1,16 @@
+.modal{
+    position: fixed;
+    display: flex;
+    top: 40%;
+    left: 40%;
+    right: 40%;
+    font-weight: bold;
+    color: aliceblue;
+    background-color: #ee3939;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 1s;
+}

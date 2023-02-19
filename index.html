@@ -8,7 +8,7 @@
     <title>My Meme Generator 4</title>
   </head>
 
-  <body onload="onInit()" class="main-layout" >
+  <body onload="onInit()" class="main-layout" onresize="resizeCanvas()">
     <header class="main-header flex nav">
       <section class="logo" onclick="onBackHome()" >Meme</section>
       <button onclick="onRenderRndImg()" class="flex-btn">I'M Flexible!</button>
@@ -30,6 +30,7 @@
       <option value="Cat">
       <option value="Idiotic">
       <option value="Baby">
+      <option value="MyImgs">
     </datalist>
     <input type="submit" onclick="onFilterByKeyword()">
     </section>
@@ -67,7 +68,7 @@
           <button class="upBtn">-</button>
           <button class="downBtn">+</button>
           <button class="save-btn" onclick="onSaveMeme()">💾</button>
-          <input class="clr-btn" type="color" value="" onchange="onSetTxtColor(this.value)" />
+          <input class="clr-btn" type="color" value="" oninput="onSetTxtColor(this.value)" />
         </section>
         <section class="media-inputs">
           <input
@@ -91,6 +92,9 @@
       </section>
     </section>
     <section class="saved-memes"></section>
+    <section class="modal">
+      <span>Saved!🥳</span>
+    </section>
     <script src="js/utils.js"></script>
     <script src="js/main.gallery-controller.js"></script>
     <script src="js/main-controller.js"></script>

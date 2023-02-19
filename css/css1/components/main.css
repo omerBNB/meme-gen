@@ -17,3 +17,7 @@
 .main-layout .editor{
     grid-area: 4/1/5/3
 }
+
+.main-layout .saved-memes{
+    grid-area: 3/1/4/3
+}

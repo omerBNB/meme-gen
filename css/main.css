@@ -19,5 +19,7 @@
 @import 'css1/components/gallery.css';
 @import 'css1/components/editor.css';
 @import 'css1/components/options-container.css';
+@import 'css1/components/saved-memes.css';
+@import 'css1/components/modal.css';
 /* media queries */
 @import 'css1/mq.css';
