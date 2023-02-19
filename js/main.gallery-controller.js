@@ -86,7 +86,7 @@ function onEditSavedMeme(img){
   document.querySelector(".gallery").style.display = "none";
   document.querySelector(".saved-memes").style.display = "none"
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-  gCurrSavedImgId = img.id
+  gCurrImgId = img.id
 }
 
 function onDown(ev) {
@@ -121,6 +121,7 @@ function onMove(ev) {
     drawText(line[0].txt, line[0].size, line[0].align, line[0].color, line[0].x, line[0].y);
   }
     let currImg = setImg(gCurrImgId);
+    console.log('currImg',currImg)
     renderMeme(currImg);
 }
 

@@ -11,8 +11,8 @@ function onInit() {
 function renderMeme(img) {
   if(gMemeIsInSaved){
     let meme = getCurrSavedImg()
-    let elImg = document.getElementById(`${meme.id}`);
-    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    console.log('img',img)
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     meme.lines.forEach((line) => {
       drawText(line.txt, line.size, line.align, line.color, line.x, line.y);
     })

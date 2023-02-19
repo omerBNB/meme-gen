@@ -58,15 +58,9 @@ function getMemes() {
 }
 
 function setImg(id) {
-  let currImg;
-  if (gMemeIsInSaved) {
-    let meme = getCurrSavedImg();
-    currImg = meme.img;
-  } else {
-    currImg = gImgs.find((img) => {
+  let currImg = gImgs.find((img) => {
       return img.id === id;
-    });
-  }
+    })
   return currImg;
 }
 
@@ -124,7 +118,7 @@ function setLineTxt(txt) {
 function getCurrMemeTxtSize() {
   if (gMemeIsInSaved) {
     let meme = getCurrSavedImg();
-    return meme.lines[gCurrSavedImgId].size;
+    return meme.lines[gCurrImgId].size;
   }
   return gMeme.lines[currLineId].size;
 }
@@ -132,7 +126,7 @@ function getCurrMemeTxtSize() {
 function changeFontSize(txtSize) {
   if (gMemeIsInSaved) {
     let meme = getCurrSavedImg();
-    meme.lines[gCurrSavedImgId].size = txtSize;
+    meme.lines[gCurrImgId].size = txtSize;
     let currImgId = gSavedMemes.findIndex((img) => {
       return img.id === meme.id;
     });
@@ -145,7 +139,7 @@ function changeFontSize(txtSize) {
 function getCurrSavedImg() {
   let memes = loadFromStorage(STORAGE_KEY);
   let meme = memes.find((img) => {
-    return img.id === gCurrSavedImgId;
+    return img.id === +gCurrImgId;
   });
   console.log('meme',meme)
   return meme;
@@ -283,7 +277,7 @@ function saveMeme() {
   let meme = {
     img: img,
     lines: lines,
-    id: makeId(),
+    id: +gCurrImgId,
   };
   gSavedMemes.push(meme);
   saveToStorage(STORAGE_KEY, gSavedMemes);

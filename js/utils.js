@@ -36,6 +36,7 @@ function getRandomColor() {
 }
 function onImgInput(ev) {
     loadImageFromInput(ev, renderImg)
+    // gImgs.push()
 }
 
 // CallBack func will run on success load of the img
