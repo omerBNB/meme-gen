@@ -48,6 +48,7 @@ function onEditMeme() {
   document.querySelector(".editor").style.display = "grid"
   document.querySelector(".gallery").style.display = "none"
   document.querySelector(".saved-memes").style.display = "none"
+  document.querySelector(".search-bar").style.display = "none"
   gMemeIsInSaved = false
   resetLines()
 }
@@ -56,6 +57,7 @@ function onBackHome() {
   document.querySelector(".editor").style.display = "none"
   document.querySelector(".gallery").style.display = "grid"
   document.querySelector(".saved-memes").style.display = "none"
+  document.querySelector(".search-bar").style.display = "flex"
   isNotRndLines()
   gMemeIsInSaved = false
 }
@@ -67,6 +69,7 @@ function onSaveMeme() {
 function onGoToSavedMemes() {
   document.querySelector(".editor").style.display = "none"
   document.querySelector(".gallery").style.display = "none"
+  document.querySelector(".search-bar").style.display = "flex"
   document.querySelector(".saved-memes").style.display = "grid"
   renderSavedMemes()
   gMemeIsInSaved = true
@@ -87,9 +90,11 @@ function onEditSavedMeme(img){
   document.querySelector(".editor").style.display = "grid"
   document.querySelector(".gallery").style.display = "none"
   document.querySelector(".saved-memes").style.display = "none"
+  document.querySelector(".search-bar").style.display = "none"
   console.log('img',img)
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
   gCurrImgId = img.id
+  resizeCanvas()
 }
 
 function onDown(ev) {
