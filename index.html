@@ -10,7 +10,7 @@
 
   <body onload="onInit()" class="main-layout" >
     <header class="main-header flex nav">
-      <div class="logo" onclick="onBackHome()" >Meme</div>
+      <section class="logo" onclick="onBackHome()" >Meme</section>
       <button onclick="onRenderRndImg()" class="flex-btn">I'M Flexible!</button>
       <nav class="main-nav">
         <ul class="main-menu flex clean-list li">
@@ -21,18 +21,7 @@
       </nav>
     </header>
     
-    <div id="search-bar" class="search-bar">
-      <!-- <input
-        data-trans="search-fliter"
-        type="search"
-        id="query"
-        name="q"
-        placeholder="Search..."
-        value=""
-      />
-      <button data-trans="search-button" onclick="onSetSearchBy()">
-        Search
-      </button> -->
+    <section id="search-bar" class="search-bar">
       <input list="browsers" name="browser" id="browser" >
     <datalist id="browsers">
       <option value="Funny">
@@ -43,64 +32,62 @@
       <option value="Baby">
     </datalist>
     <input type="submit" onclick="onFilterByKeyword()">
-    </div>
+    </section>
     <section class="gallery">
       <!-- <img id="1" src="imgs/1.jpg"> -->
     </section>
 
     <section class="editor">
-      <div class="canvas-container" >
+      <section class="canvas-container" >
         <canvas
           width="300"
           height="300"
-          style="outline: 1px solid green"
+          style="outline: 1px solid green; border-radius: 15px;"
           id="my-canvas"
         ></canvas>
-      </div>
+      </section>
       <section class="options-container">
-        <div class="user-inputs">
+        <section class="user-inputs">
           <input
             type="text"
             id="txt-input"
             oninput="onSetLineTxt(this.value)"
             value=""
           />
-          <input type="color" value="" onchange="onSetTxtColor(this.value)" />
-        </div>
-        <div class="text-edit-container">
-          <button onclick="onAddLine()">➕ Line</button>
-          <button onclick="onIncreaseFont()">⬆️ Txt Size</button>
-          <button onclick="onDecreaseFont()">⬇️ Txt Size</button>
-        </div>
-        <div class="second-bottuns-container">
-          <button id="focusButton" onclick="onSwichLine()">
-            ⬇️⬆️ Switch Lines
+        </section>
+        <section class="text-edit-container">
+          <button id="focusButton" class="switch-line-btn" onclick="onSwichLine()">⬇️⬆️
           </button>
-          <button onclick="onEraseLine()">Erase Line</button>
-          <button class="upBtn">⬆️ Line Height</button>
-          <button class="downBtn">⬇️ Line Height</button>
-          <button onclick="onSaveMeme()">Save Meme</button>
-        </div>
-        <div class="inputs">
+          <button class="plus-btn" onclick="onAddLine()">➕</button>
+          <button class="erase-btn" onclick="onEraseLine()">✖️</button>
+        </section>
+        <section class="second-bottuns-container">
+          <button class="increase-font-btn" onclick="onIncreaseFont()">A+</button>
+          <button class="decrease-font-btn" onclick="onDecreaseFont()">A-</button>
+          <button class="upBtn">-</button>
+          <button class="downBtn">+</button>
+          <button class="save-btn" onclick="onSaveMeme()">💾</button>
+          <input class="clr-btn" type="color" value="" onchange="onSetTxtColor(this.value)" />
+        </section>
+        <section class="media-inputs">
           <input
             type="file"
-            class="file-input btn"
+            class="file-input"
             name="image"
             onchange="onImgInput(event)"
           />
 
-          <button class="btn" onclick="onUploadImg()">
-            Upload Image from Canvas
+          <button class="upload-btn" onclick="onUploadImg()">
+            Upload
           </button>
-
           <a
             href="#"
-            class="btn"
+            class="download-btn"
             onclick="downloadImg(this)"
             download="my-img.jpg"
-            >Download as jpeg</a
+            >Download</a
           >
-        </div>
+        </section>
       </section>
     </section>
     <section class="saved-memes"></section>

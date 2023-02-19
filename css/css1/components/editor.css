@@ -1,0 +1,19 @@
+.editor {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, 300px);
+  gap: 15px;
+}
+
+.options-container {
+  display: grid;
+  grid-template-rows: 16.66% 16.66% 33% 16.66% 16.66%;
+  justify-items: center;
+  align-items: center;
+  box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+  border-radius: 30px;
+  background-color: #bbc4d1;
+  opacity: 1;
+  gap: 10px;
+  /* padding: 40px; */
+}

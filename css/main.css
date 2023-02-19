@@ -3,11 +3,21 @@
 @import 'base.css';
 @import 'vars.css';
 /* components */
-@import 'components/main.css';
+/* @import 'components/main.css';
 @import 'components/header.css';
 @import 'components/imgs.css';
 @import 'components/canvas.css';
 @import 'components/logo.css';
-@import 'components/searchbar.css';
+@import 'components/searchbar.css'; */
 /* media queries */
-@import 'mq/mobile.css'
+/* @import 'mq/mobile.css' */
+
+@import 'css1/components/main.css';
+@import 'css1/components/main-header.css';
+@import 'css1/components/logo.css';
+@import 'css1/components/search-bar.css';
+@import 'css1/components/gallery.css';
+@import 'css1/components/editor.css';
+@import 'css1/components/options-container.css';
+/* media queries */
+@import 'css1/mq.css';

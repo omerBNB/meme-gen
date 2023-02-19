@@ -1,0 +1,13 @@
+.search-bar {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  border-radius: 29px;
+  background-color: #22252c;
+  justify-content: center;
+}
+
+.search-bar input{
+    border-radius: 10px;
+    padding: 5px;
+}
