@@ -14,7 +14,6 @@ function onInit() {
 function renderMeme(img) {
   if(gMemeIsInSaved){
     let meme = getCurrSavedImg()
-    ('meme',meme)
     let elImg = document.getElementById(`${meme[0].id}`)
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
     meme[0].lines.forEach((line) => {
@@ -50,7 +49,6 @@ function onIncreaseFont() {
     return
   }
   txtSize += 4
-  ("txtSize", txtSize)
   changeFontSize(txtSize)
   let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId)
   renderMeme(currImg)
@@ -62,7 +60,6 @@ function onDecreaseFont() {
     return
   }
   txtSize -= 4
-  ("txtSize", txtSize)
   changeFontSize(txtSize)
   let currImg = (gMemeIsInSaved)?  getCurrSavedImg():setImg(gCurrImgId)
   renderMeme(currImg)

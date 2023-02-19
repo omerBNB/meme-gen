@@ -41,6 +41,7 @@ function onRenderRndImg() {
   let img = getRandomImg()
   onRndImgSelect(img)
   isRndLines()
+  resizeCanvas()
 }
 
 function onEditMeme() {
