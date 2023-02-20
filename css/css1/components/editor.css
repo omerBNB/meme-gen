@@ -3,6 +3,7 @@
   justify-content: center;
   grid-template-columns: repeat(2, 300px);
   gap: 15px;
+  margin-block-start: 30px;
 }
 
 .options-container {

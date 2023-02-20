@@ -40,8 +40,8 @@ function onRndImgSelect(currImg) {
 function onRenderRndImg() {
   let img = getRandomImg()
   onRndImgSelect(img)
-  isRndLines()
   resizeCanvas()
+  isRndLines()
 }
 
 function onEditMeme() {
@@ -84,6 +84,16 @@ function renderSavedMemes() {
   `<img id="${memeImg.id}" src="${memeImg.img}" class="canvas-imgs" onclick="onEditSavedMeme(this)">`)
   document.querySelector(".saved-memes").innerHTML = strHTMLS.join("")
 }
+function onShowAbout(){
+  let elModal = document.querySelector(".modal1")
+  elModal.style.opacity = '1'
+}
+
+function onCloseModal(){
+  let elModal = document.querySelector(".modal1")
+  elModal.style.opacity = '0'
+}
+
 
 function onEditSavedMeme(img){
   document.querySelector(".editor").style.display = "grid"

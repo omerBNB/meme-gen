@@ -16,7 +16,7 @@
         <ul class="main-menu flex clean-list li">
           <li onclick="onBackHome()">Gallery</li>
           <li onclick="onGoToSavedMemes()">Memes</li>
-          <li>About</li>
+          <li onclick="onShowAbout()">About</li>
         </ul>
       </nav>
     </header>
@@ -94,6 +94,14 @@
     <section class="saved-memes"></section>
     <section class="modal">
       <span>Saved!🥳</span>
+    </section>
+    <section class="modal1">
+      <h1>Welcome To My Meme Generator</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. aha yea
+        Temporibus quasi voluptatibus, fugiat repudiandae iure beatae, 
+        blanditiis deserunt iusto veniam voluptate, quidem praesentium repellat vel. 
+        Exercitationem possimus rerum impedit minus quasi!</p>
+        <button onclick="onCloseModal()">X</button>
     </section>
     <script src="js/utils.js"></script>
     <script src="js/main.gallery-controller.js"></script>
