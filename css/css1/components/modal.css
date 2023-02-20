@@ -1,6 +1,6 @@
 .modal {
   position: fixed;
-  display: flex;
+  display: none;
   top: 40%;
   left: 40%;
   right: 40%;
@@ -11,12 +11,11 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  opacity: 0;
-  transition: opacity 1s;
 }
-.modal1 {
+
+/* .modal1 {
   position: fixed;
-  display: flex;
+  display: none;
   flex-direction: column;
   top: 30%;
   left: 30%;
@@ -28,8 +27,6 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  opacity: 0;
-  transition: opacity 1s;
 }
 
 .modal1 button {
@@ -38,4 +35,4 @@
   top: 29.5%;
   right: 29.5%;
   cursor: pointer;
-}
+} */
