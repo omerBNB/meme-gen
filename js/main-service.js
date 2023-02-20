@@ -294,9 +294,9 @@ function saveMeme() {
   gSavedMemes.push(meme)
   saveToStorage(STORAGE_KEY, gSavedMemes)
   let elModal = document.querySelector('.modal')
-  elModal.style.opacity = '1'
+  elModal.style.display = 'flex'
   setTimeout (() =>{
-    elModal.style.opacity = '0'
+    elModal.style.display = 'none'
   },1500)
 }
 

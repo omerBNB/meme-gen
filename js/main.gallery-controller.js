@@ -86,12 +86,12 @@ function renderSavedMemes() {
 }
 function onShowAbout(){
   let elModal = document.querySelector(".modal1")
-  elModal.style.opacity = '1'
+  elModal.style.display = 'flex'
 }
 
 function onCloseModal(){
   let elModal = document.querySelector(".modal1")
-  elModal.style.opacity = '0'
+  elModal.style.opacity = 'none'
 }
 
 
